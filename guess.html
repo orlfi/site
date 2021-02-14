@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загадки</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="test.js"></script>
+    <script type="text/javascript">
+        var answer = Math.round(Math.random() * 100),
+            tryCount = 0,
+            maxTryCounts = 3,
+            currentUser = 1;
+
+        window.onload = function () {
+            // writeText(document.getElementById("info").innerText + " " + answer);
+        }
+
+        function readInt() {
+            var number = document.getElementById("userAnswer").value;
+            return parseInt(number);
+            //return +document.getElementById("userAnswer").value;
+        }
+
+        function writeText(text) {
+            document.getElementById("info").innerHTML = text;
+        }
+
+        function hide(id) {
+            document.getElementById(id).style.display = "none";
+        }
+        function guess() {
+            tryCount++;
+            var userAnswer = readInt();
+
+            if (userAnswer == answer) {
+                writeText("Угадал игрок " + currentUser);
+                hide("userAnswer");
+                hide("button");
+            }
+            else if (tryCount >= maxTryCounts) {
+                writeText("Вы проиграли. Правильный ответ: " + answer);
+                hide("userAnswer");
+                hide("button");
+            }
+            else if (userAnswer > answer)
+                writeText("Игрок " + currentUser + ", Вы ввели слишком большое число. Осталось попыток: " + (maxTryCounts - tryCount));
+            else if (userAnswer < answer)
+                writeText("Игрок " + currentUser + ", Вы ввели слишком маленькое число. Осталось попыток: " + (maxTryCounts - tryCount));
+
+            currentUser = currentUser == 1 ? 2 : 1;
+        }
+    </script>
+</head>
+<body">
+    <div class="header">
+        <a href="index.html">Главная</a>
+        <a href="puzzle.html">Загадки</a>
+        <a href="guess.html">Угадайка</a>
+        <a href="generator.html">Генератор случайных паролев</a>
+    </div>
+    <div class="content">
+        <div class="center">
+            <h1>Игра угадайка</h1>
+            <div class="box">
+                <p id="info">Угадайте число от 0 до 100</p>
+                <input type="text" id="userAnswer">
+                <br>
+                <a href="#" id="button" onclick="guess()">Ответить</a>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    <div class="footer">
+        Copyright &copy; Orlfi
+    </div>
+    <button onClick="">Test</button>
+
+    </body>
+
+</html>

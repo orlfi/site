@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загадки</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="test.js"></script>
+    <script type="text/javascript">
+        // window.onload = function () {
+        //     writeText(document.getElementById("info").innerText + " " + answer);
+        // }
+        var charArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'q', 'w',
+            'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k',
+            'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+
+        function readInt() {
+            var number = document.getElementById("userAnswer").value;
+            return parseInt(number);
+            //return +document.getElementById("userAnswer").value;
+        }
+
+        function writeText(id,text) {
+            document.getElementById(id).innerHTML = text;
+        }
+
+        function hide(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        function generateAnsi(count) {
+            var result = "";
+            for (var i = 0; i < count; i++) {
+                var code = 48 + Math.round(Math.random() * 66);
+                if (code >= 58 && code <= 64)
+                    code += 7;
+                else if (code >= 91)
+                    code += 6;
+                result += String.fromCharCode(code);
+            }
+            return result;
+        }
+        function generateFromArray(count, chars) {
+            var result = "";
+            for (var i = 0; i < count; i++) {
+                var index = Math.round(Math.random() * chars.length);
+                result += chars[index];
+            }
+            return result;
+        }
+
+        function generate() {
+            var count = readInt();
+            // writeText(generateText(count));
+            if (!isNaN(count))
+                writeText("passwd", generateFromArray(count, charArr));
+        }
+    </script>
+</head>
+<body">
+    <div class="header">
+        <a href="index.html">Главная</a>
+        <a href="puzzle.html">Загадки</a>
+        <a href="guess.html">Угадайка</a>
+        <a href="generator.html">Генератор случайных паролев</a>
+    </div>
+    <div class="content">
+        <div class="center">
+            <h1>Генератор случайных паролев</h1>
+            <div class="box">
+                <p id="info">Введите количество знаков пароля</p>
+                <input type="text" id="userAnswer">
+                <p id="passwd"></p>
+
+                <a href="#" id="button" onclick="generate()">Сгенерировать</a>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    <div class="footer">
+        Copyright &copy; Orlfi
+    </div>
+    <button onClick="">Test</button>
+
+    </body>
+
+</html>
